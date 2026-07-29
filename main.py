@@ -1,28 +1,49 @@
-from kivy.app import App
-from kivy.uix.boxlayout import BoxLayout
+# импортируем класс App из модуля kivy.app
+# используется для создания приложения
+from kivy.app import App 
+# подключаем инструмент дляя вывода надписи
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+# позволяет располагать элементы друг за другом
+from kivy.uix.boxlayout import BoxLayout
 
-
-class MainApp(App):
-    def build(self):
-        layout = BoxLayout(
-            orientation="vertical",
-            padding=30,
-            spacing=20,
+class MyFirstApp(App): # создаёт объект приложения
+    # позволяет автоматически вызывать, когда приложение запускается
+    def build(self): # self - ссылка на текущий объект приложения
+        # создаем контейнер для элементов приложения
+        screen = BoxLayout(
+            orientation="vertical", # расположение элементов
+            padding=10, # оступ от краёв окна, иначе элементы будут почти вплотную к рамке окна
+            spacing=20 # расстояние между элементами
         )
+        # создаём заголовок 
+        self.title_label =Label(
+            text="Моё первое приложение",
+            font_size=20 # размер шрифта
+        )
+        # создаем второй текст
+        self.info_label = Label(
+            text="Приложение создано для Python",
+            font_size = 20
+        )
+        # создаем кнопку 
+        self.start_button = Button(
+            text="Нажми",
+            font_size=22,
+            size_hint=(1, 0.3) # размер кнопки (1 - занимает всю ширину окна, 0.3 - занимает 30% высоты относительно доступного пространства)
 
-        label = Label(text="Приложение собрано в APK")
-        button = Button(text="Нажми меня")
+        )
+        # связываем кнопку с функцией
+        self.start_button.bind(on_press=self.button_clicked)
 
-        def change_text(instance):
-            label.text = "Всё работает!"
+        # добавляем элементы на экран
+        screen.add_widget(self.title_label)
+        screen.add_widget(self.info_label)
+        screen.add_widget(self.start_button)
 
-        button.bind(on_press=change_text)
+        return screen
 
-        layout.add_widget(label)
-        layout.add_widget(button)
-        return layout
+    def button_clicked(self, button):
+        self.info_label.text = "Кнопка работает!"
 
-
-MainApp().run()
+MyFirstApp().run()
