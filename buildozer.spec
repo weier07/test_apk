@@ -1,6 +1,6 @@
 [app]
 
-title = My First App
+title = Моё приложение
 package.name = myfirstapp
 package.domain = org.student
 
