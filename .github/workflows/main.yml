@@ -1,0 +1,33 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Загрузка файлов проекта
+        uses: actions/checkout@v4
+
+      - name: Создание папки кэша
+        run: mkdir -p .buildozer-cache
+
+      - name: Сборка APK
+        run: |
+          docker run --rm \
+            --volume "${{ github.workspace }}:/home/user/hostcwd" \
+            --volume "${{ github.workspace }}/.buildozer-cache:/home/user/.buildozer" \
+            ghcr.io/kivy/buildozer:latest \
+            android debug
+
+      - name: Сохранение APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-apk
+          path: bin/*.apk
+          if-no-files-found: error
