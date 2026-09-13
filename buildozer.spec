@@ -6,7 +6,7 @@ package.domain = org.student
 
 source.dir = .
 
-icon.filename = %(source.dir)s/icon.png
+icon.filename = %(source.dir)s/icon.jpg
 
 version = 0.1
 
