@@ -1,11 +1,12 @@
 [app]
 
-title = Моё приложение
-package.name = myfirstapp
+title = ChinaQuote
+package.name = chinaquote
 package.domain = org.student
 
 source.dir = .
-source.include_exts = py,png,jpg,jpeg,kv,atlas,json
+
+icon.filename = %(source.dir)s/icon.png
 
 version = 0.1
 
